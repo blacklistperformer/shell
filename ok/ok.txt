@@ -1,0 +1,2 @@
+thsi is the text file made through the new shell
+saving the file and exiting 
