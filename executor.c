@@ -175,7 +175,7 @@ char *search_path(char *file)
     return NULL;
 }
 
-//exec commands 
+// exec commands
 int do_exec_cmd(int argc, char **argv)
 {
 
@@ -258,7 +258,41 @@ int do_simple_command(struct node_s *node)
         {
             updatePath(direc);
         }
+        else if (strcmp(direc, "-") == 0)
+        {
+            // chdir("..");
+            printf("%s\n", getenv("PWD"));
+        }
+        else if (strcmp(direc, "~") == 0)
+        {
+            // chdir("..");
+            // updatepath(direc);
+            // printf("%s\n", getenv("PWD"));
 
+            // printf("Hi");
+
+            char *path1;
+            char *home_directory = getenv("HOME");
+
+            if (home_directory == NULL)
+            {
+                printf("Error: HOME environment variable not set\n");
+                return 1;
+            }
+            path1 = home_directory;
+
+            int success = chdir(path1);
+            if (success == -1)
+            {
+                printf("Error: Unable to change directory to %s\n", path1);
+                return 1;
+            }
+            // printf("%s\n", getenv("PWD"));
+            // updatePath(home_directory);
+            setenv("PWD", path1, 1);
+            printf("%s\n", path1);
+            return 0;
+        }
         else
         {
             printf("Error: no such directory. \n");
