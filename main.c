@@ -15,7 +15,7 @@
 void print_prompt1(void)
 {
     char *path = getenv("PWD"), *log = getenv("LOGNAME"), *user = getenv("USER");
-    fprintf(stderr, "\033[1;31m%s@%s\033[0m:\033[1;34m~%s\033[0m$ ", log, user, path);
+    fprintf(stderr, "\033[1;36m%s@%s\033[0m:\033[1;33m~%s\033[0m$ ", log, user, path);
 }
 
 // the second function prints the second promt string, this string is for multiu line command
@@ -143,7 +143,7 @@ int parse_and_execute(struct source_s *src)
 {
     skip_white_spaces(src);
     struct token_s *tok = tokenize(src);
-    
+
     if(tok == &eof_token)
     {
         return 0;
